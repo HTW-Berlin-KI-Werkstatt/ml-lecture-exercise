@@ -16,3 +16,4 @@ gdown
 torchviz
 openai>=1.55
 gensim==4.3.3
+datasets
