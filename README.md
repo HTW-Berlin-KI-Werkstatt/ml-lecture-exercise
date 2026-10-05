@@ -19,7 +19,7 @@ The notebooks cover a wide range of machine learning topics, including but not l
 
 ## Getting Started
 
-To get started with these notebooks, you'll need to set up the conda environment specified in `environment.yml`. You can also use another package manager for virtual environments if you like. Ensure you have [Anaconda](https://www.anaconda.com/products/distribution) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installed on your system.
+The notebooks use **Python 3.12**. We recommend [uv](https://docs.astral.sh/uv/) for setting up the environment: it is fast and installs the right Python version for you. Conda and plain `venv` work as well, see the alternatives below.
 
 1. **Clone the Repository**
 
@@ -28,58 +28,54 @@ To get started with these notebooks, you'll need to set up the conda environment
    cd ml-lecture-exercise
    ```
 
-2. **Option 1: Create the Environment with Conda**
+2. **Create the Environment with uv (recommended)**
 
-   Create the environment (we use python 3.12):
-
-   ```bash
-   conda create -n ml-exercise-env python=3.12
-   ```
-
-   Activate the newly created environment:
+   Install uv if you do not have it yet (see the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) for other options):
 
    ```bash
-   conda activate ml-exercise-env
+   curl -LsSf https://astral.sh/uv/install.sh | sh                        # MacOS or Linux
+   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"  # Windows
    ```
 
-2. **Option 2: Create the Environment with VirtualEnv**
-
-   Create the environment with venv as follows (please use python 3.12):
-   ```bash
-   python -m venv venv
-   ```
-
-   and activate the environment
-   ```bash
-   source venv/bin/activate # or venv/bin/activate
-   ```
-
-2. **Option 3: Create the Environment with UV**
-
-   If you have MacOS, you might need to do the following beforehand:
-   ```bash
-   brew install apache-arrow
-   ```
-
-   Create the environment
+   Create the environment and install all packages:
 
    ```bash
    uv venv --python 3.12
-   source .venv/bin/activate # for MacOS or Linux
+   source .venv/bin/activate     # MacOS or Linux
+   # .venv\Scripts\activate     # Windows
    uv pip install -r requirements.txt
    ```
 
-3. **Install packages**
+   <details>
+   <summary><b>Alternative: Conda</b></summary>
 
-    Install all packages with ``pip``:
+   Requires [Anaconda](https://www.anaconda.com/products/distribution) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
-    ```bash
+   ```bash
+   conda create -n ml-exercise-env python=3.12
+   conda activate ml-exercise-env
    pip install -r requirements.txt
    ```
 
-4. **Launch Jupyter Notebook**
+   </details>
 
-   Start the Jupyter Notebook server:
+   <details>
+   <summary><b>Alternative: venv and pip</b></summary>
+
+   Requires an installed Python 3.12.
+
+   ```bash
+   python3.12 -m venv .venv
+   source .venv/bin/activate     # MacOS or Linux
+   # .venv\Scripts\activate     # Windows
+   pip install -r requirements.txt
+   ```
+
+   </details>
+
+3. **Launch Jupyter Notebook**
+
+   Start the Jupyter Notebook server (with the environment activated):
 
    ```bash
    jupyter notebook
