@@ -1,8 +1,8 @@
 matplotlib
 notebook>=7.2.2
-torch>=2.1.2
-torchvision>=0.16.2
-numpy<2
+torch>=2.3
+torchvision>=0.18
+numpy>=2
 pandas
 scikit-image>=0.24.0
 scikit-learn>=1.5.1
@@ -15,5 +15,5 @@ ipywidgets
 gdown
 torchviz
 openai>=1.55
-gensim==4.3.3
+gensim>=4.4
 datasets

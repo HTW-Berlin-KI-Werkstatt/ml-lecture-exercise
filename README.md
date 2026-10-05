@@ -30,10 +30,10 @@ To get started with these notebooks, you'll need to set up the conda environment
 
 2. **Option 1: Create the Environment with Conda**
 
-   Create the environment (python 3.9 is compatible with torch):
+   Create the environment (we use python 3.12):
 
    ```bash
-   conda create -n ml-exercise-env python=3.9
+   conda create -n ml-exercise-env python=3.12
    ```
 
    Activate the newly created environment:
@@ -44,7 +44,7 @@ To get started with these notebooks, you'll need to set up the conda environment
 
 2. **Option 2: Create the Environment with VirtualEnv**
 
-   Create the environment with venv as follows (please use python 3.9):
+   Create the environment with venv as follows (please use python 3.12):
    ```bash
    python -m venv venv
    ```
@@ -64,7 +64,7 @@ To get started with these notebooks, you'll need to set up the conda environment
    Create the environment
 
    ```bash
-   uv venv --python 3.9
+   uv venv --python 3.12
    source .venv/bin/activate # for MacOS or Linux
    uv pip install -r requirements.txt
    ```
