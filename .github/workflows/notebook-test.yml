@@ -11,25 +11,55 @@ on:
 jobs:
   test-notebooks:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-        
+        cache: pip
+
+    # Datasets and models downloaded by the notebooks (CIFAR-10 alone takes ~15 min without cache)
+    - name: Restore datasets and models
+      id: data-cache
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          notebooks/07/cifar10
+          notebooks/07/FashionMNIST
+          ~/.cache/huggingface
+          ~/gensim-data
+          ~/scikit_learn_data
+        key: notebook-data-${{ hashFiles('notebooks/**/*.ipynb') }}
+        restore-keys: notebook-data-
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        # CPU-only pytorch: the runner has no GPU, this skips several GB of CUDA libraries
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
         pip install -r requirements.txt
         pip install nbconvert
- 
+
     - name: Execute Jupyter Notebooks
       run: |
         for notebook in $(find . -name "*.ipynb" | grep -v _solution | grep -v _temp | grep -v exercise_gpt_inference.ipynb); do
           echo "Running $notebook"
           jupyter nbconvert --to notebook --execute "$notebook" --stdout > /dev/null || exit 1
         done
+
+    # Save even if a notebook failed, so the next run does not download everything again
+    - name: Save datasets and models
+      if: always() && steps.data-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: |
+          notebooks/07/cifar10
+          notebooks/07/FashionMNIST
+          ~/.cache/huggingface
+          ~/gensim-data
+          ~/scikit_learn_data
+        key: notebook-data-${{ hashFiles('notebooks/**/*.ipynb') }}

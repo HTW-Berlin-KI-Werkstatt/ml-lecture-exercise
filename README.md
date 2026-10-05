@@ -46,6 +46,15 @@ The notebooks use **Python 3.12**. We recommend [uv](https://docs.astral.sh/uv/)
    uv pip install -r requirements.txt
    ```
 
+   **Tip for Linux without an NVIDIA GPU:** on Linux, the default `torch` package includes several GB of CUDA libraries for NVIDIA GPUs. If your computer has no NVIDIA GPU, you can install the much smaller CPU-only version *before* installing the requirements:
+
+   ```bash
+   uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+   uv pip install -r requirements.txt
+   ```
+
+   On MacOS and Windows this is not necessary, the default packages are already CPU-only (MacOS still uses the GPU of Apple Silicon via `mps`). With pip instead of uv, use the same commands without `uv`.
+
    <details>
    <summary><b>Alternative: Conda</b></summary>
 
