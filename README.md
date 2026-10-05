@@ -64,7 +64,7 @@ To get started with these notebooks, you'll need to set up the conda environment
    Create the environment
 
    ```bash
-   uv venv python==3.9
+   uv venv --python 3.9
    source .venv/bin/activate # for MacOS or Linux
    uv pip install -r requirements.txt
    ```
