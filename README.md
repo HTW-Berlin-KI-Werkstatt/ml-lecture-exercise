@@ -55,6 +55,17 @@ The notebooks use **Python 3.12**. We recommend [uv](https://docs.astral.sh/uv/)
 
    On MacOS and Windows this is not necessary, the default packages are already CPU-only (MacOS still uses the GPU of Apple Silicon via `mps`). With pip instead of uv, use the same commands without `uv`.
 
+   **Older Macs with an Intel processor** are not supported by current versions of pytorch. Please use the [JupyterHub of the KI-Werkstatt](https://ki-k8s-1.f2.htw-berlin.de/jupyter/hub/login) instead.
+
+   **Problems with `transformers` or `tokenizers`?** Older versions of this repository could end up with an outdated `transformers` version (failing with errors about building `tokenizers` or Rust). Pull the latest version of the repository and update your environment:
+
+   ```bash
+   git pull
+   uv pip install -U -r requirements.txt
+   ```
+
+   If this does not help, delete the `.venv` folder and create the environment again as described above.
+
    <details>
    <summary><b>Alternative: Conda</b></summary>
 
